@@ -83,7 +83,6 @@ async function main() {
 	// First I want to read the file
 	const semester1 = await prisma.semester.create({
 		data: {
-			id: 20211,
 			year: 2021,
 			type: "Spring",
 			running: false,
@@ -93,7 +92,6 @@ async function main() {
 	});
 	const semester2 = await prisma.semester.create({
 		data: {
-			id: 20212,
 			year: 2021,
 			type: "Fall",
 			running: false,
@@ -133,7 +131,7 @@ async function main() {
 					},
 				});
 
-				await prisma.grade.create({
+				prisma.grade.create({
 					data: {
 						enrollmentId: enrollment.id,
 						assesmentId: ass.id,
