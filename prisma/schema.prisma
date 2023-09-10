@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Department {
+  Computer
+  Communication
+  Power
+  Mechanincs
+  Prep
+}
+
+enum Role {
+  Professor
+  Assistant
+}
+
+enum SemesterType {
+  Fall
+  Summer
+  Spring
+}
+
+enum EventType {
+  Announcement
+  Vacation
+  Deadline
+  Exams
+}
+
+enum AssesmentType {
+  Quiz
+  Midterm
+  Final
+  Project
+  Bonus
+  Report
+  Assignemnt
+  Lab
+  Practical
+  Attendance
+}
+
+enum SessionType {
+  Lecture
+  Lab
+  Section
+}
+
+
+model Semester {
+  id      Int      @id @default(autoincrement())
+  year    Int?
+  type    String
+  start   DateTime
+  end     DateTime
+  running Boolean  @default(false)
+  instances CourseInstance[]
+}
+
+model Course {
+  id      String   @id
+  name    String
+  total   Int
+  instances CourseInstance[]
+}
+
+model CourseInstance {
+  id       Int          @id @default(autoincrement())
+  course   Course       @relation(fields: [courseId], references: [id])
+  courseId String
+  semester Semester     @relation(fields: [semesterId], references: [id])
+  semesterId Int
+  staff    Staff[]
+  enrollments Enrollment[]
+  assesments Assesment[]
+  sessions Session[]
+  
+}
+
+model Student {
+  id           Int       @id @default(autoincrement())
+  name         String
+  department   Department @default(Prep)
+  email        String?    @unique
+  national_id  String?    @unique
+  phone_number String?    @unique
+  residence    String?
+  joined       DateTime?
+  graduate     Boolean   @default(false)
+  enrollments  Enrollment[]
+}
+
+
+model Staff {
+  id         Int   @id
+  name       String
+  department String
+  instances  CourseInstance[]
+  assesments Assesment[]
+}
+
+model Enrollment {
+  id          Int       @id @default(autoincrement())
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+  instance    CourseInstance @relation(fields: [instanceId], references: [id])
+  instanceId  Int
+  grades      Grade[]
+}
+
+
+model Assesment {
+  id         Int           @id @default(autoincrement())
+  total      Int
+  type       AssesmentType?
+  instance   CourseInstance @relation(fields: [instanceId], references: [id])
+  instanceId Int
+  issuer     Staff         @relation(fields: [issuerId], references: [id])
+  issuerId   Int
+  event      Event @relation(fields: [eventId], references: [id])
+  eventId Int
+  grades     Grade[]
+
+
+}
+model Grade {
+  id           Int        @id @default(autoincrement())
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id])
+  enrollmentId Int
+  assesment    Assesment  @relation(fields: [assesmentId], references: [id])
+  assesmentId  Int
+  markedAt     DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  mark         Int
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+  name String
+  start DateTime
+  end DateTime
+  general Boolean @default(false)
+  assesments Assesment[]
+}
+
+model Session {
+  id Int @id @default(autoincrement())
+  instance CourseInstance @relation(fields: [instanceId], references: [id])
+  instanceId Int
+  content String?
+  period Int
+  dow Int
+  type SessionType
+}
