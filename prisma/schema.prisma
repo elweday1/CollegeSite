@@ -8,11 +8,56 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 
+enum Department {
+  Computer
+  Communication
+  Power
+  Mechanincs
+  Prep
+}
+
+enum Role {
+  Professor
+  Assistant
+}
+
+enum SemesterType {
+  Fall
+  Summer
+  Spring
+}
+
+enum EventType {
+  Announcement
+  Vacation
+  Deadline
+  Exams
+}
+
+enum AssesmentType {
+  Quiz
+  Midterm
+  Final
+  Project
+  Bonus
+  Report
+  Assignemnt
+  Lab
+  Practical
+  Attendance
+}
+
+enum SessionType {
+  Lecture
+  Lab
+  Section
+}
 
 
 model Semester {
@@ -48,7 +93,7 @@ model CourseInstance {
 model Student {
   id           Int       @id @default(autoincrement())
   name         String
-  department   String?    @default("Prep")
+  department   Department @default(Prep)
   email        String?    @unique
   national_id  String?    @unique
   phone_number String?    @unique
@@ -80,7 +125,7 @@ model Enrollment {
 model Assesment {
   id         Int           @id @default(autoincrement())
   total      Int
-  type       String
+  type       AssesmentType?
   instance   CourseInstance @relation(fields: [instanceId], references: [id])
   instanceId Int
   issuer     Staff         @relation(fields: [issuerId], references: [id])
@@ -118,5 +163,5 @@ model Session {
   content String?
   period Int
   dow Int
-  type String
+  type SessionType
 }
