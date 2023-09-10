@@ -48,7 +48,7 @@ model CourseInstance {
 model Student {
   id           Int       @id @default(autoincrement())
   name         String
-  department   String?    @default(Prep)
+  department   String?    @default("Prep")
   email        String?    @unique
   national_id  String?    @unique
   phone_number String?    @unique
