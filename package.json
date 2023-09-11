@@ -11,7 +11,7 @@
 		"lint": "eslint .",
 		"postinstall": "pnpm prisma generate",
 		"migrate": " pnpm prisma migrate deploy",
-		"vercel-build": "pnpm prisma generate && pnpm prisma migrate reset --force && vite build"
+		"vercel-build": "pnpm prisma generate && pnpm prisma migrate deploy && pnpm prisma migrate reset --force && vite build"
 	},
 	"devDependencies": {
 		"@iconify/svelte": "^3.1.4",
