@@ -45,7 +45,7 @@
 			type: "component",
 			component: {
 				ref: Timetable,
-				props: {sessionData}
+				props: {sessionData, fullScreenMode:true}
 			},
 		});
 	};
@@ -58,9 +58,7 @@
 		</article>
 	</Card>
 	<Card title="Lecture Timetable" class="overflow-auto">
-		<button on:click={showTT}>
 			<Timetable  {sessionData}/>
-		</button>
 	</Card>
 	<Card title="Calendar" class="w-full h-full">
 		<Calendar {events} />
