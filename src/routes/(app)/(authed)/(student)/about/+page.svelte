@@ -40,14 +40,13 @@
 	];
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
 	<div class="space-y-10 text-center flex flex-col items-center">
 		<article class="h-full w-full col-span-2">
-			<div class="p-10">
+			<div class="p-3">
 				<h1 class="sm:text-3xl text-2xl font-bold title-font text-white text-center p-3">Egypt's one of the most prestigious faculties.</h1>
 				<p class="text-center">Helwan University's Faculty of Engineering offers diverse programs like Civil, Mechanical, and Electrical Engineering. Admission details are on the website. They provide research, scholarships, and career assistance. Facilities include labs. Program durations vary.</p>
 			</div>
-			<div class="grid place-content-stretch lg:grid-cols-3 grid-cols-2 gap-10 text-center w-full">
+			<div class="grid place-content-stretch lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 md:gap-7 text-center w-full">
 				{#each facts as { icon, value, label }, index}
 					<div class="p-4 w-full" in:transition={{ duration: 800, delay: index * 100, x: "-100%" }}>
 						<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
@@ -60,5 +59,4 @@
 			</div>
 		</article>
 	</div>
-</div>
 

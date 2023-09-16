@@ -22,7 +22,7 @@
 	]
 </script>
 
-<TabGroup justify="justify-center" active="variant-filled-primary" hover="hover:variant-soft-primary" flex="flex-1 lg:flex-none" rounded="" border="" class="bg-surface-100-800-token w-full">
+<TabGroup justify="justify-center" active="variant-filled-primary" hover="hover:variant-soft-primary" flex="flex-1 lg:flex-none"  border="" class="bg-surface-100-800-token w-full rounded-lg">
 	{#each departments as { name, icon, href }}
 		
 	<TabAnchor {href} selected={$page.url.pathname === href}>

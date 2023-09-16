@@ -11,7 +11,14 @@
 		{ title: "Credits", value: "69", outof: "160" },
 		{ title: "Level", value: "3", outof: "5" },
 	];
-	import Progress from "$lib/components/Progress.svelte";
+	import { goto } from '$app/navigation';
+	function logout(e) {
+		fetch("/api/auth/logout", { method: "POST" });
+		goto('/login');
+		
+	}
+
+	
 </script>
 
 <section class="card h-[35rem] w-80 flex p-5 flex-col">
@@ -45,6 +52,12 @@
 			<span class="w-full text-gray-400 font-semibold text-sm">Preferred Color:</span>
 			<input type="range" name="range-slider" bind:value={colorValue} class="range-slider-input w-20 h-2 ring-0 outline-0 border-0 ag-slider-field " aria-label="" min="0" max="360" step="1" style={`accent-color: hsl(${colorValue}, 40%, 70%);`} />
 		</div>
+		<div class="flex flex-col items-center gap-0.5 group">
+			<button type="submit" on:click={logout}  class="btn bg-error-500 text-sm ">
+				Logout 				
+			</button>
+		</div>
+	
 	</div>
 	<!-- 	<div id="range-slider" class="mt-3 text-white text-sm">h-2
 		<span class="text-gray-400 font-semibold">Preferred Color: </span>

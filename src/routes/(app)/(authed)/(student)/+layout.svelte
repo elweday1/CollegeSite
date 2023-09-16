@@ -6,7 +6,8 @@
 	import { fly as transition, fade } from "svelte/transition";
 	import { initializeStores, Drawer, getDrawerStore, Modal, getModalStore } from "@skeletonlabs/skeleton";
 
-	initializeStores();
+
+
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
@@ -15,15 +16,14 @@
 		drawerStore.open({});
 	}
 
-	/**
-	 * @type {string | null}
-	 */
-	let route;
-
-	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
 	import { storePopup } from "@skeletonlabs/skeleton";
+
+
+	
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+
 </script>
 
 <!-- App Shell -->
@@ -43,6 +43,8 @@
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 					</svg>
 				</button>
+
+
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<img src="Logo.svg" alt="omak" />
