@@ -1,5 +1,6 @@
 <script>
 	// @ts-nocheck
+	// some comment 
 	import Icon from "@iconify/svelte";
 	import { TabGroup, Tab, TabAnchor } from "@skeletonlabs/skeleton";
 	import { goto } from "$app/navigation";
@@ -65,6 +66,7 @@
 	</ul>
 </form>
 </main>
+
 
 <style lang="postcss">
 
