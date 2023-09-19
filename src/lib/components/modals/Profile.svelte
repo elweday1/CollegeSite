@@ -28,10 +28,10 @@
 	
 </script>
 
-<section class="card h-[35rem] w-80 flex p-5 flex-col">
+<section class="card h-[40rem] w-80 flex p-5  flex-col">
 	<div class="flex items-center justify-between">
 		<span class="text-gray-400 text-sm">Profile Settings</span>
-		<span class="text-emerald-400">
+		<span class="text-primary-400">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
 			</svg>
@@ -43,8 +43,8 @@
 
 	<h2 class="text-white font-bold text-lg tracking-wide text-center mt-2">Mohammed Nasser Hilal Ahmed</h2>
 
-	<p class="text-primary-400 font-semibold mt-2">Communication And Information Technology</p>
-	<div class="flex flex-col gap-2 py-3">
+	<p class="text-primary-400 font-semibold mt-2">CIE department, Level 3</p>
+	<div class="flex flex-col gap-4 py-3">
 		{#each stats as { title, value, outof }}
 			<div class="flex flex-col items-center gap-0.5 group">
 				<span class="w-full text-gray-400 font-semibold text-sm">{title}:</span>
@@ -62,7 +62,6 @@
 					<option value={t}>{t}</option>
 				{/each}
 			</select>
-			<input type="range" name="range-slider" bind:value={colorValue} class="range-slider-input w-20 h-2 ring-0 outline-0 border-0 ag-slider-field " aria-label="" min="0" max="360" step="1" style={`accent-color: hsl(${colorValue}, 40%, 70%);`} />
 		</div>
 		<div class="flex flex-col items-center gap-0.5 group">
 			<button type="submit" on:click={logout}  class="btn bg-error-500 text-sm ">
@@ -71,42 +70,8 @@
 		</div>
 		
 
-🌨️
-Wintry
-
-🤖
-Modern
-
-🚀
-Rocket
-
-🧜‍♀️
-Seafoam
-
-📺
-Vintage
-
-🏜️
-Sahara
-
-👔
-Hamlindigo
-
-💫
-Gold Nouveau
-
-⭕
-Crimson
-
 	
 	</div>
-	<!-- 	<div id="range-slider" class="mt-3 text-white text-sm">h-2
-		<span class="text-gray-400 font-semibold">Preferred Color: </span>
-		<div class="flex gap-1 place-content-center place-items-center">
-			<Icon icon="material-symbols:check" class="w-9 h-9 text-green-500   " />
-		</div>
-	</div>
- -->
 </section>
 
 <style>
