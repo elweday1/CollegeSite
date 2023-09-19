@@ -1,6 +1,3 @@
-// @ts-nocheck
-
-
 /**
  * Loads data from the API.
  *
@@ -8,18 +5,23 @@
  * @return {object} An object containing the loaded data from the API.
  */
 export async function load ({fetch, cookies}) {
-	const studentId = cookies.get("SESSION_STUDENT");
-	const sessions = await fetch("/api/sessions");
-	const sessionData = await sessions.json();
-	const students = await fetch("/api/students");
-	const histData = await students.json();
-	const grades = await fetch("/api/grades");
-	const boxData = await grades.json();
-	const notifications = await fetch("/api/notifications/" + studentId);
-	const notificationsData = await notifications.json();
-	const student = await fetch("/api/students/" + studentId);
-	const studentData = await student.json();
-	return { notificationsData, sessionData, histData, boxData, studentData, studentId };
+  const studentId = cookies.get("SESSION_STUDENT");
+
+  const responses = await Promise.all([
+    fetch("/api/sessions"),
+    fetch("/api/students"),
+    fetch("/api/grades"),
+    fetch("/api/notifications/" + studentId),
+    fetch("/api/students/" + studentId)
+  ]);
+
+  const [sessionsResponse, studentsResponse, gradesResponse, notificationsResponse, studentResponse] = responses;
+
+  const sessionData = await sessionsResponse.json();
+  const histData = await studentsResponse.json();
+  const boxData = await gradesResponse.json();
+  const notificationsData = await notificationsResponse.json();
+  const studentData = await studentResponse.json();
+
+  return { notificationsData, sessionData, histData, boxData, studentData, studentId };
 };
-
-
