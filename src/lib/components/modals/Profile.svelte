@@ -4,6 +4,7 @@
 	import { myCustomTheme } from "$lib/../theme.js";
 	import { RangeSlider } from "@skeletonlabs/skeleton";
 	import Icon from "@iconify/svelte";
+	import { onMount } from "svelte";
 	let colorValue = 0;
 	let stats = [
 		{ title: "CGPA", value: "3.56", outof: "4.00" },
@@ -16,6 +17,12 @@
 		fetch("/api/auth/logout", { method: "POST" });
 		goto('/login');
 		
+	}
+	let body
+	let theme = "the-theme"
+	function changeTheme() {
+		body = document.querySelector('body')
+		body.setAttribute("data-theme", theme);
 	}
 
 	
@@ -36,7 +43,7 @@
 
 	<h2 class="text-white font-bold text-lg tracking-wide text-center mt-2">Mohammed Nasser Hilal Ahmed</h2>
 
-	<p class="text-emerald-400 font-semibold mt-2">Communication And Information Technology</p>
+	<p class="text-primary-400 font-semibold mt-2">Communication And Information Technology</p>
 	<div class="flex flex-col gap-2 py-3">
 		{#each stats as { title, value, outof }}
 			<div class="flex flex-col items-center gap-0.5 group">
@@ -49,7 +56,12 @@
 			</div>
 		{/each}
 		<div class="flex flex-col items-center gap-0.5 group">
-			<span class="w-full text-gray-400 font-semibold text-sm">Preferred Color:</span>
+			<span class="w-full text-gray-400 font-semibold text-sm">Preferred Theme:</span>
+			<select class="select" bind:value={theme} on:change={changeTheme}>
+				{#each ["skeleton", "modern", "crimson", "wintry", "gold-nouveau", "hamlindigo", "rocket", "sahara", "vintage", "seafoam"] as  t}
+					<option value={t}>{t}</option>
+				{/each}
+			</select>
 			<input type="range" name="range-slider" bind:value={colorValue} class="range-slider-input w-20 h-2 ring-0 outline-0 border-0 ag-slider-field " aria-label="" min="0" max="360" step="1" style={`accent-color: hsl(${colorValue}, 40%, 70%);`} />
 		</div>
 		<div class="flex flex-col items-center gap-0.5 group">
@@ -57,6 +69,35 @@
 				Logout 				
 			</button>
 		</div>
+		
+
+🌨️
+Wintry
+
+🤖
+Modern
+
+🚀
+Rocket
+
+🧜‍♀️
+Seafoam
+
+📺
+Vintage
+
+🏜️
+Sahara
+
+👔
+Hamlindigo
+
+💫
+Gold Nouveau
+
+⭕
+Crimson
+
 	
 	</div>
 	<!-- 	<div id="range-slider" class="mt-3 text-white text-sm">h-2
