@@ -19,8 +19,8 @@
 </script>
 
 
-<Fullscreen  let:onExit let:onToggle >
-	<button on:click={() => {onToggle(); isFullScreen = !isFullScreen} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null; isFullScreen = false}} >
+<Fullscreen  let:onExit let:onToggle on:change={e => isFullScreen = !isFullScreen} >
+	<button on:click={() => {onToggle()} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null}} >
 		<div class:isFullScreen class=" grid grid-cols-7 gap-1 md:gap-2 lg:gap-5  w-full ">
 			<div />
 			{#each [0, 1, 2, 3, 4, 5] as period}
