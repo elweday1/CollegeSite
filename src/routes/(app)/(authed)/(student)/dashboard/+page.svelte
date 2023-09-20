@@ -8,9 +8,11 @@
 	import { Table, tableMapperValues } from "@skeletonlabs/skeleton";
 	export let data;
 	import {Color}  from "$lib/utils/colors.js";
-    import { getContext } from "svelte";
-	const defaultColor = new Color(15, 186, 129);
-    $:  color = getContext('color') || defaultColor;
+    import { getContext, afterUpdate } from "svelte";
+	let color = new Color("15", "186", "129");
+	afterUpdate(() => {
+		color = new Color(...(localStorage.getItem("primaryColor").split(" ") ?? ["15", "186", "129"]) );
+	})
 	let { histData, boxData, studentData} = data;
 	const sourceData = studentData.courses
 	let header = [...Object.keys(sourceData[0])];

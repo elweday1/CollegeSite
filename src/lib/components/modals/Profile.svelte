@@ -20,6 +20,7 @@
 		body.setAttribute("data-theme", theme);
 		const styles = getComputedStyle(body);
 		const primaryColor = styles.getPropertyValue("--color-primary-500")
+		localStorage.setItem("theme", theme)
 		console.log(primaryColor)
 		setContext('color', new Color(...primaryColor.split(" ")))
 	}
