@@ -44,7 +44,7 @@
 	<h2 class="text-white font-bold text-lg tracking-wide text-center mt-2">Mohammed Nasser Hilal Ahmed</h2>
 
 	<p class="text-primary-400 font-semibold mt-2">CIE department, Level 3</p>
-	<div class="flex flex-col gap-4 py-3">
+	<div class="relative flex flex-col gap-4 py-3 h-full">
 		{#each stats as { title, value, outof }}
 			<div class="flex flex-col items-center gap-0.5 group">
 				<span class="w-full text-gray-400 font-semibold text-sm">{title}:</span>
@@ -63,7 +63,7 @@
 				{/each}
 			</select>
 		</div>
-		<div class="flex flex-col items-center gap-0.5 group">
+		<div class="absolute bottom-4 flex flex-col items-center gap-0.5 group place-self-center">
 			<button type="submit" on:click={logout}  class="btn bg-error-500 text-sm ">
 				Logout 				
 			</button>
