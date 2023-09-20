@@ -6,12 +6,17 @@
 	import { onMount } from "svelte";
 	export let type;
 	export let data;
+	export let direction = "x";
+	export let maxHeight = "200px"
+	export let showLegend = false
 	Chart.register(BoxPlotController, BoxAndWiskers, LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip, Filler, LineController, BarController);
 	let ctx;
 	const config = {
 		type: type,
 		data: data,
+		
 		options: {
+			indexAxis: direction,
 			animation: {
 				duration: 500,
 				delay: 300,
@@ -42,7 +47,7 @@
 			},
 			plugins: {
 				legend: {
-					display: false,
+					display: showLegend,
 				},
 				tooltip: {
 					intersect: false,
@@ -56,4 +61,4 @@
 	});
 </script>
 
-<canvas class=" h-full w-full max-h-52" bind:this={ctx} />
+<canvas class=" h-full w-full max-h-[{maxHeight}]" bind:this={ctx} style:max-height={maxHeight} />

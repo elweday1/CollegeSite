@@ -14,26 +14,41 @@
 		color = new Color(...(localStorage.getItem("primaryColor").split(" ") ?? ["15", "186", "129"]) );
 	})
 	let { histData, boxData, studentData} = data;
-	const sourceData = studentData.courses
+	
+	const wrapColumnValues = (data, wrapFuncs) => {
+		return data.map((row) => {
+			for (let [column, wrap] of Object.entries(wrapFuncs)) {
+
+				row[column] = row[column].length < 10? (typeof wrap === "string") ? `<span class="${wrap}">${row[column]}</span>` : wrap(row[column]) : row[column]
+			}
+			return row
+		})
+	}
+	const sourceData = wrapColumnValues(studentData.courses, {
+		status: (value) =>  value=="Passed"? `<span class="bg-success-500/30 text-success-300 p-1 rounded">${value}</span>` : `<span class="bg-error-500/30 text-error-300 p-1 rounded">${value}</span>`
+	})
 	let header = [...Object.keys(sourceData[0])];
 	const tableSimple = {
 		head: header,
 		body: tableMapperValues(sourceData, header),
 		meta: tableMapperValues(sourceData, header),
+
 	};
+	
 
 	const nCourses = [...Object.keys(boxData)].length;
-	const variance = 10;
+	const variance = 8;
 	const [labels, values] = createHistogramBins(histData, 25);
 </script>
 
 {#key color}
 	
 <div class="flex flex-col gap-5">
-	<div class="flex flex-col gap-5 w-full">
+	<div class="flex flex-col gap-5 w-full ">
 		<div class="flex flex-col gap-5 w-full">
 			<Card title="Students Curve">
 				<Chart
+				showLegend = true
 				data={{
 						labels: labels,
 						datasets: [
@@ -45,7 +60,20 @@
 								data: values,
 								fill: true,
 								tension: 0.4,
+								label: "grade", 
+
 							},
+							{
+								// annotaion line
+								type: "bar",
+								backgroundColor: color.hsla(0.6,-20),
+								borderRadius: 10,
+								data: Array(values.length).fill(0).map((_, i) => i==18? 100 : 0),
+								fill: true,
+								barThickness: 10,
+								label: "you are here", 
+								
+							}
 						],
 					}}
 				/>
@@ -53,14 +81,18 @@
 
 			<Card title="Course Grade Distribution">
 				<Chart
+					maxHeight = "400px"
+					direction="y"
 					data={{
 						labels: Object.keys(boxData),
 						datasets: [
 							{
+								axis: 'y',
 								type: "boxplot",
 								backgroundColor: color.colorGradient(variance, nCourses, 0.2),
 								borderColor: color.colorGradient(variance, nCourses, 1),
 								data: Object.values(boxData),
+								label: "",
 							},
 						],
 					}}
@@ -71,8 +103,11 @@
 		</div>
 	</div>
 
-	<Card title="Table">
+	<Card title="Grades">
 		<Table source={tableSimple} interactive={true} />
 	</Card>
 </div>
 {/key}
+
+
+
