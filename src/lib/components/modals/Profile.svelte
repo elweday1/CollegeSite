@@ -2,27 +2,26 @@
 	// @ts-nocheck
 	import { Avatar } from "@skeletonlabs/skeleton";
 	import { myCustomTheme } from "$lib/../theme.js";
-	import { RangeSlider } from "@skeletonlabs/skeleton";
-	import Icon from "@iconify/svelte";
-	import { onMount } from "svelte";
-	let colorValue = 0;
+	import { goto } from '$app/navigation';
+	import {Color}  from "$lib/utils/colors.js";
+	import {  setContext } from "svelte";
 	let stats = [
 		{ title: "CGPA", value: "3.56", outof: "4.00" },
-		{ title: "Bitches", value: "0", outof: "69" },
-		{ title: "Credits", value: "69", outof: "160" },
-		{ title: "Level", value: "3", outof: "5" },
 	];
-	import { goto } from '$app/navigation';
 	function logout(e) {
 		fetch("/api/auth/logout", { method: "POST" });
 		goto('/login');
 		
 	}
-	let body
+	
 	let theme = "the-theme"
 	function changeTheme() {
-		body = document.querySelector('body')
+		let body = document.querySelector('body')
 		body.setAttribute("data-theme", theme);
+		const styles = getComputedStyle(body);
+		const primaryColor = styles.getPropertyValue("--color-primary-500")
+		console.log(primaryColor)
+		setContext('color', new Color(...primaryColor.split(" ")))
 	}
 
 	

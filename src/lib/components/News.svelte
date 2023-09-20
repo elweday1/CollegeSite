@@ -6,6 +6,18 @@
 	export let data;
 	import timeFormat from "$lib/utils/timeFormat";
 	const options = { year: "numeric", month: "two-digit", day: "two-digit" };
+	import { initializeStores, getModalStore } from "@skeletonlabs/skeleton";
+	import Staff from "$lib/components/modals/Staff.svelte";
+	
+	const modalStore = getModalStore();
+	const showProfile = () => {
+		modalStore.trigger({
+			type: "component",
+			component: {
+				ref: Staff,
+			},
+		});
+	};
 </script>
 
 <ol class="w-full flex">
@@ -22,7 +34,9 @@
 				</div>
 				<div class="flex gap-5">
 					<p class="text-gray-100 mb-4">
-						{news.issuer}
+						<button class="underline font-bold" on:click={showProfile}>
+							{news.issuer}
+						</button>
 						{news.action} a {news.content}
 						{news.course}
 						{news.type}

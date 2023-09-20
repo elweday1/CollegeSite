@@ -3,3 +3,9 @@
 </script>
 
 <slot/>
+
+<style>
+	:global(html) {
+		font-size: 14px;
+	}
+</style>
