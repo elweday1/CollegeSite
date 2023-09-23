@@ -1,1 +1,1 @@
-FUCK ELECTRIC POWER
+content for electric power department 
