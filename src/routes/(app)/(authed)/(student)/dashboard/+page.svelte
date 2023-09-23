@@ -18,14 +18,24 @@
 	const wrapColumnValues = (data, wrapFuncs) => {
 		return data.map((row) => {
 			for (let [column, wrap] of Object.entries(wrapFuncs)) {
-
-				row[column] = row[column].length < 10? (typeof wrap === "string") ? `<span class="${wrap}">${row[column]}</span>` : wrap(row[column]) : row[column]
+				row[column] = !row[column].toString().includes("<") ? (typeof wrap === "string") ? `<span class="${wrap}">${row[column]}</span>` : wrap(row[column], row) : row[column]
 			}
 			return row
 		})
 	}
+	const colorGrade = (value, {total}) => {
+		const successGrade = total*0.6
+		const color =  value>successGrade?140*(value-successGrade)/(total-successGrade):0
+		return `<span style="color:hsla(${color},70%,40%,1)">${value}</span>`
+	}
+	const statusWrap = (value) => {
+		const colorName = value=="Passed"?"success":"error"
+		return `<span class="bg-${colorName}-500/30 text-${colorName}-300 p-1 rounded">${value}</span>` 
+	}
 	const sourceData = wrapColumnValues(studentData.courses, {
-		status: (value) =>  value=="Passed"? `<span class="bg-success-500/30 text-success-300 p-1 rounded">${value}</span>` : `<span class="bg-error-500/30 text-error-300 p-1 rounded">${value}</span>`
+		status: statusWrap,
+		mark: colorGrade
+		
 	})
 	let header = [...Object.keys(sourceData[0])];
 	const tableSimple = {
@@ -44,8 +54,8 @@
 {#key color}
 	
 <div class="flex flex-col gap-5">
+
 	<div class="flex flex-col gap-5 w-full ">
-		<div class="flex flex-col gap-5 w-full">
 			<Card title="Students Curve">
 				<Chart
 				showLegend = true
@@ -66,7 +76,7 @@
 							{
 								// annotaion line
 								type: "bar",
-								backgroundColor: color.hsla(0.6,-20),
+								backgroundColor: color.hsla(0.6,0),
 								borderRadius: 10,
 								data: Array(values.length).fill(0).map((_, i) => i==18? 100 : 0),
 								fill: true,
@@ -99,8 +109,6 @@
 				/>
 			</Card>
 
-			<div />
-		</div>
 	</div>
 
 	<Card title="Grades">
