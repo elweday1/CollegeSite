@@ -23,5 +23,7 @@ export async function load ({fetch, cookies}) {
   const notificationsData = await notificationsResponse.json();
   const studentData = await studentResponse.json();
 
-  return { notificationsData, sessionData, histData, boxData, studentData, studentId };
+  return new Promise((resolve, reject)=>{
+    resolve({ notificationsData, sessionData, histData, boxData, studentData, studentId })
+  });
 };

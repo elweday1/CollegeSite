@@ -5,6 +5,7 @@
 	import Navigation from "$lib/components/Side.svelte";
 	import { fly as transition, fade } from "svelte/transition";
 	import { initializeStores, Drawer, getDrawerStore, Modal, getModalStore } from "@skeletonlabs/skeleton";
+	export let data
 
 
 	initializeStores();
@@ -52,8 +53,15 @@
 		<Navigation />
 	</svelte:fragment>
 	{#key $page.url.pathname.split("/")[1]}
+
 		<main class="p-5" in:transition={{ x: "-100%", duration: 400 }}>
+			{#await data}
+			<p>...waiting</p>
+			{:then data} 
 			<slot />
+			{:catch error}
+    <p style="color: red">{error.message}</p>
+			{/await}
 		</main>
 	{/key}
 </AppShell>
