@@ -20,7 +20,11 @@
 
 
 <Fullscreen let:onExit let:onToggle on:change={e => isFullScreen = !isFullScreen} >
+	
 	<button class=" md:pointer-events-none" class:bg-surface-900={isFullScreen} on:click={() => {onToggle()} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null}} >
+		<span class:hidden={isFullScreen} class="text-primary-200 font-extralight md:hidden">
+			(click to Fullscreen)
+		</span>
 		<div class:isFullScreen class=" grid grid-cols-7 gap-1 md:gap-2 lg:gap-5  w-full ">
 			<div />
 			{#each [0, 1, 2, 3, 4, 5] as period}
