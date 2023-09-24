@@ -19,8 +19,8 @@
 </script>
 
 
-<Fullscreen  let:onExit let:onToggle on:change={e => isFullScreen = !isFullScreen} >
-	<button on:click={() => {onToggle()} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null}} >
+<Fullscreen let:onExit let:onToggle on:change={e => isFullScreen = !isFullScreen} >
+	<button class=" md:pointer-events-none" class:bg-surface-900={isFullScreen} on:click={() => {onToggle()} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null}} >
 		<div class:isFullScreen class=" grid grid-cols-7 gap-1 md:gap-2 lg:gap-5  w-full ">
 			<div />
 			{#each [0, 1, 2, 3, 4, 5] as period}
@@ -40,13 +40,13 @@
 		</div>
 		{#each [1, 2, 3, 4, 5, 6] as period}
 			{@const item = sessionData.find((lecture) => lecture.dow === dow+1 && lecture.period === period)}		
-			<div style={item ? `background-color:hsla(${item.intance *30}, 50%, 60%, 0.3)` : "background-color: rgba(0,0,0,0.1)"} class="text-center p-2 rounded w-full">
+			<div style={item ? `background-color:hsla(${item.intance *30}, 50%, 60%, 0.3)` : "background-color: rgba(0,0,0,0.1)"} class="text-center p-1 md:p2 rounded w-full">
 				{#if item}
-					<div class="flex flex-col">
-						<span style={`color:hsla(${item.intance *30}, 100%, 90%, 1)`} class="truncate text-[hsla(5, 50%, 50%, 0.3)]">
+					<div class="flex flex-col  ">
+						<span style={`color:hsla(${item.intance *30}, 100%, 90%, 1)`} class="truncate text-[hsla(5, 50%, 50%, 0.3)] text-sm ">
 							 {item.course} 
 						</span>
-						<span class:hidden={!isFullScreen} class="md:flex justify-between place-content-center place-items-center " >
+						<span class:hidden={!isFullScreen} class="md:flex justify-between place-content-center place-items-center text-xs font-extralight " >
 							<span style="font-size: 10px;">
 								{item.name}
 							</span>
@@ -73,11 +73,11 @@
 	
 	<style lang="postcss">
 		.isFullScreen {
-			@apply fixed left-0 top-0 bg-surface-900 p-2 ;
-			height: 100%;
-			width: 100%;
-			place-self: stretch;
-			justify-self: stretch;		
-
+            transform: rotate(90deg) ;
+            transform-origin:bottom left;
+            position:absolute;
+            top:-100vw;
+            height:100vw;
+            width:100vh;
 		}
 	</style>
