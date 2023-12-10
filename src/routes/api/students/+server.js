@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { json, error } from "@sveltejs/kit";
 import db from "$lib/prisma";
+import evtStore from "$lib/eventStream";
 
 export async function GET() {
 	const students = await db.student.findMany({
@@ -32,4 +33,10 @@ export async function GET() {
 	const sumGrades = (acc, curr) => acc + curr.grades[0].mark;
 	const sumTotals = (acc, curr) => acc + curr.instance.course.total;
 	return json(students.map((s) => Number((100 * s.enrollments.reduce(sumGrades, 0)) / s.enrollments.reduce(sumTotals, 0)).toFixed(2)).filter((value) => Number(value) > 20));
+}
+
+export async function POST({ request }) {
+	const {userId} = await request.json();
+	evtStore.send(userId);
+	return new Response(`User ${userId} created`, {});
 }

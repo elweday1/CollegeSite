@@ -6,7 +6,6 @@
  */
 export async function load ({fetch, cookies}) {
   const studentId = cookies.get("SESSION_STUDENT");
-
   const responses = await Promise.all([
     fetch("/api/sessions"),
     fetch("/api/students"),
