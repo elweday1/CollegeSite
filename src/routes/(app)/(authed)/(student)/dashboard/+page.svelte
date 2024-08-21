@@ -23,20 +23,16 @@
 			return row
 		})
 	}
-	const colorGrade = (value, {total}) => {
+	const mark = (value, {total}) => {
 		const successGrade = total*0.6
 		const color =  value>successGrade?140*(value-successGrade)/(total-successGrade):0
 		return `<span style="color:hsla(${color},70%,40%,1)">${value}</span>`
 	}
-	const statusWrap = (value) => {
+	const status = (value) => {
 		const colorName = value=="Passed"?"success":"error"
 		return `<span class="bg-${colorName}-500/30 text-${colorName}-300 p-1 rounded">${value}</span>` 
 	}
-	const sourceData = wrapColumnValues(studentData.courses, {
-		status: statusWrap,
-		mark: colorGrade
-		
-	})
+	const sourceData = wrapColumnValues(studentData.courses, {status,mark})
 	let header = [...Object.keys(sourceData[0])];
 	const tableSimple = {
 		head: header,
