@@ -54,11 +54,6 @@
 		],
 		College: [
 			{
-				name: "Departments",
-				href: "/departments",
-				icon: "vaadin:office",
-			},
-			{
 				name: "About",
 				href: "/about",
 				icon: "mdi:about",
