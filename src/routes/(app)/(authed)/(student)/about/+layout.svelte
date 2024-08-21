@@ -2,22 +2,38 @@
 	import { TabGroup, Tab, TabAnchor } from "@skeletonlabs/skeleton";
 	import { page } from "$app/stores";
 	import { fly } from "svelte/transition";
+	import Icon from "@iconify/svelte";
+	let departments = [
+		{
+			name: "Computer",
+			icon: "mdi:computer",
+			href: "/about/computer",
+		},
+		{
+			name: "Communications",
+			icon: "fluent:communication-16-filled",
+			href: "/about/communications",
+		},
+		{
+			name: "Power",
+			icon: "mdi:electricity",
+			href: "/about/power",
+		}
+	]
 </script>
 
 <TabGroup justify="justify-center" active="variant-filled-primary" hover="hover:variant-soft-primary" flex="flex-1 lg:flex-none" rounded="" border="" class="bg-surface-100-800-token w-full">
-	<TabAnchor href="/departments/power" selected={$page.url.pathname === "/departments/power"}>
-		<svelte:fragment slot="lead">(icon)</svelte:fragment>
-		<span>(label)</span>
+	{#each departments as { name, icon, href }}
+		
+	<TabAnchor {href} selected={$page.url.pathname === href}>
+		<svelte:fragment slot="lead">
+			<div class="grid place-items-center place-content-center">
+				<Icon icon={icon} class="w-6 h-6"/>
+				<span>{name}</span>
+			</div>
+		</svelte:fragment>
 	</TabAnchor>
-	<TabAnchor href="/departments/computer" selected={$page.url.pathname === "/departments/computer"}>
-		<svelte:fragment slot="lead">(icon)</svelte:fragment>
-		<span>(label)</span>
-	</TabAnchor>
-	<TabAnchor href="/departments/communications" selected={$page.url.pathname === "/departments/communications"}>
-		<svelte:fragment slot="lead">(icon)</svelte:fragment>
-		<span>(label)</span>
-	</TabAnchor>
-	<!-- ... -->
+	{/each}
 </TabGroup>
 
 {#key $page.url.pathname.split("/")[2]}
