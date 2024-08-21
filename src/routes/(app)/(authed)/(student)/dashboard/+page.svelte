@@ -8,7 +8,7 @@
 	import { Table, tableMapperValues } from "@skeletonlabs/skeleton";
 	export let data;
 	import {Color}  from "$lib/utils/colors.js";
-    import { getContext, afterUpdate } from "svelte";
+    import {  afterUpdate } from "svelte";
 	let color = new Color("15", "186", "129");
 	afterUpdate(() => {
 		color = new Color(...(localStorage.getItem("primaryColor").split(" ") ?? ["15", "186", "129"]) );
