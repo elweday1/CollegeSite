@@ -41,10 +41,10 @@
 	}
 </script>
 
-<main class="w-screen h-screen grid  p-6 max-w-3xl ">
+<main class="w-screen h-screen grid place-content-center place-items-center  p-9  ">
 
-	<form method="post" action="/api/auth/login"  class="bg-[rgb(0,0,0,0.2)] grid p-3 rounded-xl place-content-center justify-center   gap-5 relative overflow-clip" on:success={() => goto("/")}>
-		<h1 class="text-gray-400 font-bold text-center text-2xl">{capitalizeFirstLetter(selected[0])} Login</h1>
+	<form method="post" action="/api/auth/login"  class="bg-[rgb(0,0,0,0.2)] grid p-7 rounded-xl  max-w-80 h-[400px] w-full place-content-center justify-center  gap-5 relative overflow-clip" on:success={() => goto("/")}>
+		<h1 class="text-gray-400  text-center text-2xl">{capitalizeFirstLetter(selected[0])} Login</h1>
 <!-- 	<TabGroup class="w-full grid place-items-center ">
 		{#each Object.entries(options) as [name, { placeholder, icon }], index}
 			<Tab bind:group={tabSet} {name} value={index}>
@@ -58,7 +58,7 @@
 		<Icon icon="mdi-user" class="absolute aspect-square h-12 left-3 text-gray-300   " />
 	</span>
 	<button type="submit" on:click={login} class="btn variant-filled-primary uppercase font-sans font-bold hover:text-red-600">Login</button>
-	<ul class="marker:text-warning-400  list-disc list-inside text-warning-400 text-xs font-extralight">
+	<ul class="marker:text-warning-400 flex flex-col gap-2 list-disc list-inside text-warning-400 text-xs font-extralight">
 		<li>This is a beta version, most features are still under development. </li>
 		<li>The current design is a blueprint and may change.</li>
 		<li>Please report any bugs in the <a class="text-primary-500 underline" href="https://github.com/Elweday/CollegeSite">github</a> page. </li>
