@@ -1,9 +1,7 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script>
-	import { myCustomTheme } from "../../../../../theme.js";
 	// @ts-nocheck
 	import { fly as transition } from "svelte/transition";
-	import { page } from "$app/stores";
 	import Icon from "@iconify/svelte";
 	import { enableCache } from "@iconify/svelte";
 	enableCache("local");
@@ -49,7 +47,7 @@
 				<h1 class="sm:text-3xl text-2xl font-bold title-font text-white text-center p-3">Egypt's one of the most prestigious faculties.</h1>
 				<p class="text-center">Helwan University's Faculty of Engineering offers diverse programs like Civil, Mechanical, and Electrical Engineering. Admission details are on the website. They provide research, scholarships, and career assistance. Facilities include labs. Program durations vary.</p>
 			</div>
-			<div class="grid place-content-stretch grid-cols-3 gap-10 text-center w-full">
+			<div class="grid place-content-stretch lg:grid-cols-3 grid-cols-2 gap-10 text-center w-full">
 				{#each facts as { icon, value, label }, index}
 					<div class="p-4 w-full" in:transition={{ duration: 800, delay: index * 100, x: "-100%" }}>
 						<div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
@@ -64,5 +62,3 @@
 	</div>
 </div>
 
-<style lang="postcss">
-</style>
