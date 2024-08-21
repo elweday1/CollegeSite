@@ -60,7 +60,7 @@
 	};
 </script>
 
-<nav class="list-nav">
+<nav class="list-nav h-full">
 	<ul class="pt-5 gap-3 w-48 p-3 flex flex-col place-items-center h-full bg-neutral bg-surface-500/5 overflow-y-auto overflow-x-visible overscroll-y-none">
 		<Card class="place-content-center grid justify-items-center ">
 			<div class="relative grid place-items-center justify-center place-content-center p-2">
