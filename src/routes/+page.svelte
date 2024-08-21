@@ -4,9 +4,6 @@
 	import { getModalStore } from "@skeletonlabs/skeleton";
 	import News from "$lib/components/News.svelte";
 	import Calendar from "$lib/components/Calendar.svelte";
-
-	import { Table, tableMapperValues } from "@skeletonlabs/skeleton";
-	import { onMount } from "svelte";
 	export let data;
 	let { notificationsData, sessionData } = data;
 	let events = {
