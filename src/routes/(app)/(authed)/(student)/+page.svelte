@@ -45,6 +45,7 @@
 			type: "component",
 			component: {
 				ref: Timetable,
+				props: {sessionData}
 			},
 		});
 	};
