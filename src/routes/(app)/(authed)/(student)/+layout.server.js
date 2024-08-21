@@ -9,9 +9,6 @@
  */
 export async function load ({fetch, cookies}) {
 	const studentId = cookies.get("SESSION_STUDENT");
-	if (!studentId) {
-		throw redirect(302, "/login");
-	}
 	const sessions = await fetch("/api/sessions");
 	const sessionData = await sessions.json();
 	const students = await fetch("/api/students");
@@ -24,4 +21,5 @@ export async function load ({fetch, cookies}) {
 	const studentData = await student.json();
 	return { notificationsData, sessionData, histData, boxData, studentData, studentId };
 };
+
 
