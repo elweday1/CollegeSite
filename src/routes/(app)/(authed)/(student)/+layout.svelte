@@ -1,12 +1,22 @@
-	<script>
+<script>
 	// @ts-nocheck
 	import { AppShell, AppBar } from "@skeletonlabs/skeleton";
 	import { page } from "$app/stores";
 	import Navigation from "$lib/components/Side.svelte";
 	import { fly as transition, fade } from "svelte/transition";
 	import { initializeStores, Drawer, getDrawerStore, Modal, getModalStore } from "@skeletonlabs/skeleton";
+	import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
+	import { storePopup } from "@skeletonlabs/skeleton";
+	import { onMount } from "svelte";
+	import {eventStore} from "$lib/stores"; 
 	export let data
 
+	onMount(() => {
+		const evtSource = new EventSource("api/sse");
+	  	evtSource.onmessage = (e) => {
+			$eventStore = [...$eventStore, e.data];
+	  	}
+	})
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
@@ -15,8 +25,6 @@
 		drawerStore.open({});
 	}
 
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
-	import { storePopup } from "@skeletonlabs/skeleton";
 
 	
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
@@ -53,7 +61,7 @@
 		<Navigation />
 	</svelte:fragment>
 	{#key $page.url.pathname.split("/")[1]}
-		<main class="p-5" in:transition={{ x: "-100%", duration: 400 }}>
+		<main class="p-5 h-full w-full" in:transition={{ x: "-100%", duration: 400 }}>
 			{#await data}
 				<p>...waiting</p>
 			{:then data} 
