@@ -40,8 +40,9 @@ export async function GET(requestEvent) {
 		courses: student.enrollments.map((enrollment) => ({
 			code: enrollment.instance.course.id,
 			course: enrollment.instance.course.name,
-			mark: enrollment.grades[0].mark,
+			mark: enrollment.grades.reduce((a, b) => a + b.mark, 0),
 			total: enrollment.instance.course.total,
+			status: (enrollment.grades.reduce((a, b) => a + b.mark, 0) / enrollment.instance.course.total)>0.5?"Passed":"Failed",
 		})),
 	});
 }

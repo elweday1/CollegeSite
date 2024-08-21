@@ -73,7 +73,7 @@
 	
 	<style lang="postcss">
 		.isFullScreen {
-			@apply fixed left-0 top-0 bg-surface-700 p-2 ;
+			@apply fixed left-0 top-0 bg-surface-900 p-2 ;
 			height: 100%;
 			width: 100%;
 			place-self: stretch;
