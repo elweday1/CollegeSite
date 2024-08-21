@@ -20,7 +20,7 @@ export default {
 		skeleton({
 			themes: {
 				custom: [myCustomTheme],
-				preset: ["skeleton", "modern", "crimson"],
+				preset: ["skeleton", "modern", "crimson", "wintry", "gold-nouveau", "hamlindigo", "rocket", "sahara", "vintage", "seafoam"],
 			},
 		}),
 	],
