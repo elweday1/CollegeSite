@@ -20,6 +20,9 @@ dependencies:
   cookie:
     specifier: ^0.5.0
     version: 0.5.0
+  svelte-fullscreen:
+    specifier: ^2.0.0
+    version: 2.0.0
 
 devDependencies:
   '@iconify/svelte':
@@ -37,6 +40,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.24.0(svelte@4.2.0)(vite@4.4.9)
+  '@sveu/browser':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@tailwindcss/forms':
     specifier: 0.5.6
     version: 0.5.6(tailwindcss@3.3.3)
@@ -567,6 +573,16 @@ packages:
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@sveu/browser@1.0.0:
+    resolution: {integrity: sha512-+i5d63Df5v0CfOT3BLxR3Ns6iigsafYSw8g8Srzol+Z/oVA7qu0mhbpD+m+gObSiuxwdw5tC3a7NcI//4I7aXQ==}
+    dependencies:
+      '@sveu/shared': 1.0.1
+    dev: true
+
+  /@sveu/shared@1.0.1:
+    resolution: {integrity: sha512-waMJ+UXD5NV/M7L6lmXigY9Ry9TwhcBz+QDbYsDcq92bL7nlRUeh3ckvvAnxw1Nzw0T2JeEgmvZZblHuAHJL9Q==}
     dev: true
 
   /@tailwindcss/forms@0.5.6(tailwindcss@3.3.3):
@@ -1841,6 +1857,11 @@ packages:
       rimraf: 2.7.1
     dev: true
 
+  /screenfull@5.2.0:
+    resolution: {integrity: sha512-9BakfsO2aUQN2K9Fdbj87RJIEZ82Q9IGim7FqM5OsebfoFC6ZHXgDq/KvniuLTPdeM8wY2o6Dj3WQ7KeQCj3cA==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
@@ -1982,6 +2003,12 @@ packages:
       postcss-scss: 4.0.7(postcss@8.4.29)
       svelte: 4.2.0
     dev: true
+
+  /svelte-fullscreen@2.0.0:
+    resolution: {integrity: sha512-Sg03gZAyYtW7gqTA9WoFXY2m4CkFmRFu/+n7bmGJnYt/qxtO0N2tdQ61lZwbgN2AAMh2zF/185CTBI9vv3zvKQ==}
+    dependencies:
+      screenfull: 5.2.0
+    dev: false
 
   /svelte-hmr@0.15.3(svelte@4.2.0):
     resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
