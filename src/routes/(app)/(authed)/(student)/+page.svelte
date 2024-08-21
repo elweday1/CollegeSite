@@ -6,6 +6,7 @@
 	import Calendar from "$lib/components/Calendar.svelte";
 	export let data;
 	let { notificationsData, sessionData } = data;
+	// todo: add events to the events table on the db instead of hardcoding it here
 	let events = {
 		"1/8/2023": ["Christmas Day"],
 		"26/1/2023": ["January 25th Revolution and Police Day"],
@@ -49,6 +50,8 @@
 			},
 		});
 	};
+
+
 </script>
 
 <div class="flex flex-col gap-5">

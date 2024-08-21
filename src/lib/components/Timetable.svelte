@@ -55,7 +55,7 @@
 				{#if item}
 				<div class="flex flex-col">
 					<span style={`color:hsla(${item.intance *30}, 80%, 90%, 1)`} class="text-[hsla(5, 50%, 50%, 0.3)]"> {item.course} </span>
-						<span class:hidden={!isFullScreen} class="flex justify-between place-content-center place-items-center " >
+						<span class:hidden={!isFullScreen} class="md:flex justify-between place-content-center place-items-center " >
 							<span class="truncate">
 								{item.name}
 							</span>

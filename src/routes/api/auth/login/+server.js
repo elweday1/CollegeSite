@@ -4,7 +4,6 @@ import { redirect } from "@sveltejs/kit";
 
 export async function POST({ request, cookies }) {
 	const data = await request.formData();
-	console.log("data", data);
 	const userid = data.get("userid");
 	const user = await db.student.findFirst({
 		where: { id: Number(userid) },
