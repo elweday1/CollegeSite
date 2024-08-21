@@ -16,23 +16,12 @@
 	};
 	let icon = {Lecture:"mdi:lecture", Section:"ph:chalkboard-teacher-fill", Lab:"icomoon-free:lab"};
 	let item
-	const toggleFS = (onRequest,onExit ) => ()=>  {
-		isFullScreen = !isFullScreen
-		if (isFullScreen) {
-			onRequest()
-			//lock("landscape")
-		}
-		else {
-			onExit()
-		}
-	}
 </script>
 
 
-<Fullscreen let:onRequest let:onExit >
-	<button on:click={toggleFS(onRequest,onExit)} >
-
-		<div class:isFullScreen class=" grid grid-cols-7 gap-1 md:gap-2  md:w-full w-[30rem]">
+<Fullscreen  let:onExit let:onToggle >
+	<button on:click={() => {onToggle(); isFullScreen = !isFullScreen} }  on:keydown|preventDefault={(e) => {(e.key === "Escape")? onExit():null; isFullScreen = false}} >
+		<div class:isFullScreen class=" grid grid-cols-7 gap-1 md:gap-2 lg:gap-5  w-full ">
 			<div />
 			{#each [0, 1, 2, 3, 4, 5] as period}
 			<div class="text-center p-1 ">
@@ -46,24 +35,26 @@
 		</div>
 		{/each}
 		{#each ["SAT", "SUN", "MON", "TUE", "WEN", "THU"] as day, dow}
-		<div class="text-center p-1">
+		<div class="text-center p-1 w-full">
 			{day}
 		</div>
 		{#each [1, 2, 3, 4, 5, 6] as period}
 			{@const item = sessionData.find((lecture) => lecture.dow === dow+1 && lecture.period === period)}		
-		<div style={item ? `background-color:hsla(${item.intance *30}, 50%, 50%, 0.3)` : "background-color: rgba(0,0,0,0.1)"} class="text-center p-1 rounded h-[14]">
+			<div style={item ? `background-color:hsla(${item.intance *30}, 50%, 60%, 0.3)` : "background-color: rgba(0,0,0,0.1)"} class="text-center p-2 rounded w-full">
 				{#if item}
-				<div class="flex flex-col">
-					<span style={`color:hsla(${item.intance *30}, 80%, 90%, 1)`} class="text-[hsla(5, 50%, 50%, 0.3)]"> {item.course} </span>
+					<div class="flex flex-col">
+						<span style={`color:hsla(${item.intance *30}, 100%, 90%, 1)`} class="truncate text-[hsla(5, 50%, 50%, 0.3)]">
+							 {item.course} 
+						</span>
 						<span class:hidden={!isFullScreen} class="md:flex justify-between place-content-center place-items-center " >
-							<span class="truncate">
+							<span style="font-size: 10px;">
 								{item.name}
 							</span>
 							<Icon icon={icon[item.type]} />
-						</span>
+							</span>
 					</div>
-					{/if}
-				</div>
+				{/if}
+			</div>
 			{/each}
 			{/each}
 			<div class="flex justify-center gap-6 mt-3 col-span-7">

@@ -1,12 +1,10 @@
-<script>
+	<script>
 	// @ts-nocheck
 	import { AppShell, AppBar } from "@skeletonlabs/skeleton";
 	import { page } from "$app/stores";
 	import Navigation from "$lib/components/Side.svelte";
 	import { fly as transition, fade } from "svelte/transition";
 	import { initializeStores, Drawer, getDrawerStore, Modal, getModalStore } from "@skeletonlabs/skeleton";
-
-
 
 
 	initializeStores();
@@ -18,7 +16,6 @@
 
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
 	import { storePopup } from "@skeletonlabs/skeleton";
-
 
 	
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });

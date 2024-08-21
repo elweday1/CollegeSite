@@ -5,19 +5,11 @@
 	import { Avatar } from "@skeletonlabs/skeleton";
 	import { page } from "$app/stores";
 	import { afterUpdate } from "svelte";
-	import { initializeStores, getDrawerStore } from "@skeletonlabs/skeleton";
+	import { getDrawerStore } from "@skeletonlabs/skeleton";
 	import Profile from "$lib/components/modals/Profile.svelte";
 	import { getModalStore } from "@skeletonlabs/skeleton";
+	
 	const modalStore = getModalStore();
-
-	const popupHover = {
-		event: "hover",
-		target: "popupHover",
-		placement: "top",
-	};
-	import { popup } from "@skeletonlabs/skeleton";
-
-	initializeStores();
 	const drawerStore = getDrawerStore();
 	let route;
 
@@ -25,6 +17,7 @@
 		route = $page.url.pathname;
 		console.log(route);
 	});
+
 	const showProfile = () => {
 		modalStore.trigger({
 			type: "component",
