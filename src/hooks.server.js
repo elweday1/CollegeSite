@@ -6,7 +6,7 @@ export const handle = async ({ event, resolve }) => {
             throw redirect(302, "/login");
     }
     if (event.route.id?.includes("/(app)/(unauthed)/login") && access) {
-            throw redirect(302, event.route.id);
+            throw redirect(302, "/");
     }
     const response = await resolve(event);
     return response;
