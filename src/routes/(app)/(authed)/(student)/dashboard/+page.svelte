@@ -29,8 +29,7 @@
 		return `<span style="color:hsla(${color},70%,40%,1)">${value}</span>`
 	}
 	const statusWrap = (value) => {
-		const colorName = value=="Passed"?"success":"error"
-		return `<span class="bg-${colorName}-500/30 text-${colorName}-300 p-1 rounded">${value}</span>` 
+		return value=="Passed"?`<span class="p-1 bg-success-500/50 text-success-300 rounded">${value}</span>`:`<span class="p-1 bg-error-500/50 text-error-300 rounded">${value}</span>`
 	}
 	const sourceData = wrapColumnValues(studentData.courses, {
 		status: statusWrap,
