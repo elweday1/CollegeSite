@@ -53,14 +53,13 @@
 		<Navigation />
 	</svelte:fragment>
 	{#key $page.url.pathname.split("/")[1]}
-
 		<main class="p-5" in:transition={{ x: "-100%", duration: 400 }}>
 			{#await data}
-			<p>...waiting</p>
+				<p>...waiting</p>
 			{:then data} 
-			<slot />
+				<slot data />
 			{:catch error}
-    <p style="color: red">{error.message}</p>
+    			<p style="color: red">{error.message}</p>
 			{/await}
 		</main>
 	{/key}
